@@ -1,0 +1,6 @@
+.sidebar-link {
+  color: #9fa6bc; /* Tu color personalizado */
+  margin-top: 0.8rem; /* Equivalente a mt-2 en Tailwind */
+  font-size: 0.8rem; /* Equivalente a text-sm en Tailwind */
+  margin-left: 1.5rem; /* Equivalente a ml-4 en Tailwind */
+}
