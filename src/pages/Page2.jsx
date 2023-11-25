@@ -5,7 +5,7 @@ const Page2 = () => {
   return (
     <Layout>
       {/* Aquí iría el contenido específico de la página Page2 */}
-      contenido pagina 2
+      Contenido pagina 2
     </Layout>
   );
 };

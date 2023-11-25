@@ -1,3 +1,15 @@
+/* Asegúrate de que el contenedor principal tenga posición relativa */
+.flex.flex-1 {
+  position: relative;
+}
+
+/* Estilo para los iconos para asegurar que siempre estén visibles */
+.sidebar-link .h-5.w-5 {
+  flex-shrink: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
 /* Añade transiciones para el ancho del sidebar */
 .transition-width {
   transition: width 0.3s;
@@ -5,53 +17,91 @@
 
 /* Ajusta el estilo de los enlaces para manejar los estados colapsados y expandidos */
 .sidebar-link {
-  color: #9fa6bc;
-  padding: 0.5rem 1rem;
-  /* Padding aplicado */
-  font-size: 0.8rem;
-  display: flex;
   align-items: center;
-  overflow: hidden;
-  transition: all 0.3s;
   border-radius: 0.5rem;
+  color: #9fa6bc;
+  display: flex;
+  font-size: 0.8rem;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
 }
 
-/* Estilo para los iconos para asegurar que siempre estén visibles */
-.sidebar-link .h-5.w-5 {
-  flex-shrink: 0;
-  /* Evita que el icono se reduzca */
-  height: 1.25rem;
-  /* Ajusta el tamaño si es necesario, h-5 generalmente es 1.25rem */
-  width: 1.25rem;
-  /* Ajusta el tamaño si es necesario, w-5 generalmente es 1.25rem */
+/* Estilo de hover para los enlaces de la barra lateral */
+.sidebar-link:hover {
+  background-color: #31374a;
+  color: #fff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Clase para cuando el sidebar está colapsado */
+.sidebar-collapsed {
+  position: absolute;
+  z-index: 100;
+}
+
+/* Oculta los enlaces secundarios cuando el sidebar está colapsado */
+.sidebar-collapsed .sidebar-link-child {
+  display: none;
 }
 
 /* Estilo cuando el sidebar está colapsado */
 .w-16 .sidebar-link {
   justify-content: center;
-  /* Centra el icono cuando el sidebar está colapsado */
 }
 
 .w-16 .sidebar-link span {
   display: none;
 }
 
+/* Clase para cuando el sidebar está expandido */
+.sidebar-expanded {
+  position: fixed;
+  width: 64;
+  z-index: 100;
+}
+
 /* Estilo cuando el sidebar está expandido */
 .w-64 .sidebar-link {
   justify-content: start;
-  /* Alinea el contenido al inicio cuando está expandido */
 }
 
 .w-64 .sidebar-link span {
   display: inline;
-  /* o 'block', dependiendo de tus necesidades */
-  margin-left: 0.5rem;  
+  margin-left: 0.5rem;
   opacity: 1;
 }
 
-/* Estilo de hover para los enlaces de la barra lateral */
-.sidebar-link:hover {
-  background-color: #31374a;
-  transition: background-color 0.2s ease-in-out;
-  color: #fff;
+/* Estilos para el sidebar */
+.sidebar {
+  overflow-y: auto;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+}
+
+/* Estilos para WebKit browsers como Chrome, Safari y Edge */
+.sidebar::-webkit-scrollbar {
+  background: transparent;
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Cambia el color en hover */
+.sidebar:hover {
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.sidebar-link-child {
+  margin-left: 1.5rem;
 }

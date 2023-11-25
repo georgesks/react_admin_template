@@ -11,7 +11,7 @@ const App = () => {
         <Header /> {/* Asumiendo que Header no es flex-1 */}
         <div className="flex flex-1 overflow-hidden">
           <Sidebar />
-          <main className="flex-1 overflow-y-auto bg-gray-200">
+          <main className="flex-1 overflow-y-auto bg-gray-200 ml-16">
             <AppRoutes />
           </main>
         </div>
