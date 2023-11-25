@@ -1,6 +1,57 @@
+/* Añade transiciones para el ancho del sidebar */
+.transition-width {
+  transition: width 0.3s;
+}
+
+/* Ajusta el estilo de los enlaces para manejar los estados colapsados y expandidos */
 .sidebar-link {
-  color: #9fa6bc; /* Tu color personalizado */
-  margin-top: 0.8rem; /* Equivalente a mt-2 en Tailwind */
-  font-size: 0.8rem; /* Equivalente a text-sm en Tailwind */
-  margin-left: 1.5rem; /* Equivalente a ml-4 en Tailwind */
+  color: #9fa6bc;
+  padding: 0.5rem 1rem;
+  /* Padding aplicado */
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.3s;
+  border-radius: 0.5rem;
+}
+
+/* Estilo para los iconos para asegurar que siempre estén visibles */
+.sidebar-link .h-5.w-5 {
+  flex-shrink: 0;
+  /* Evita que el icono se reduzca */
+  height: 1.25rem;
+  /* Ajusta el tamaño si es necesario, h-5 generalmente es 1.25rem */
+  width: 1.25rem;
+  /* Ajusta el tamaño si es necesario, w-5 generalmente es 1.25rem */
+}
+
+/* Estilo cuando el sidebar está colapsado */
+.w-16 .sidebar-link {
+  justify-content: center;
+  /* Centra el icono cuando el sidebar está colapsado */
+}
+
+.w-16 .sidebar-link span {
+  display: none;
+}
+
+/* Estilo cuando el sidebar está expandido */
+.w-64 .sidebar-link {
+  justify-content: start;
+  /* Alinea el contenido al inicio cuando está expandido */
+}
+
+.w-64 .sidebar-link span {
+  display: inline;
+  /* o 'block', dependiendo de tus necesidades */
+  margin-left: 0.5rem;  
+  opacity: 1;
+}
+
+/* Estilo de hover para los enlaces de la barra lateral */
+.sidebar-link:hover {
+  background-color: #31374a;
+  transition: background-color 0.2s ease-in-out;
+  color: #fff;
 }
