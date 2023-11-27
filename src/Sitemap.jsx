@@ -4,6 +4,10 @@ import CogIcon from "@heroicons/react/24/outline/CogIcon";
 
 const Sitemap = [
   {
+    name: "Comercial",
+    isGroupLabel: true,
+  },
+  {
     name: "Page 1",
     path: "/page1",
     icon: HomeIcon,
@@ -12,7 +16,7 @@ const Sitemap = [
     name: "Multi level 1",
     path: "#",
     icon: CogIcon,
-    children: [
+    childrens: [
       {
         name: "Page 3",
         path: "/page3",
@@ -21,13 +25,17 @@ const Sitemap = [
     ],
   },
   {
+    name: "Configuracion",
+    isGroupLabel: true,
+  },
+  {
     name: "Multi level 2",
     path: "#",
     icon: ShoppingBagIcon,
-    children: [
+    childrens: [
       {
-        name: "Page 4",
-        path: "/page4",
+        name: "Page 2",
+        path: "/page2",
       },
       // Puedes agregar más subenlaces aquí
     ],

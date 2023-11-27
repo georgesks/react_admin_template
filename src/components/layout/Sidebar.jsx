@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import HomeIcon from "@heroicons/react/24/outline/HomeIcon";
-import ShoppingBagIcon from "@heroicons/react/24/outline/ShoppingBagIcon";
-import CogIcon from "@heroicons/react/24/outline/CogIcon";
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
-import "./Sidebar.css";
 import Sitemap from "../../Sitemap";
+import "./Sidebar.css";
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -19,6 +16,19 @@ const Sidebar = () => {
     }));
   };
 
+  // Renderizar submenús de forma recursiva si es necesario
+  const renderSubMenu = (children) => {
+    return children.map((child) => (
+      <Link
+        to={child.path}
+        key={child.name}
+        className="flex items-center space-x-2 sidebar-link sidebar-link-child"
+      >
+        <span>{child.name}</span>
+      </Link>
+    ));
+  };
+
   return (
     <div
       className={`flex flex-col sidebar ${
@@ -28,64 +38,49 @@ const Sidebar = () => {
       onMouseLeave={() => setIsCollapsed(true)}
     >
       <nav className="mt-5">
-        <Link to="/page1" className="flex items-center space-x-2 sidebar-link">
-          <HomeIcon className="h-5 w-5" />
-          <span>Page 1</span>
-        </Link>
+        {Sitemap.map((item) => {
+          // Verificar si el item es una etiqueta de grupo
+          if (item.isGroupLabel) {
+            // Renderizar etiquetas de grupo solo si el sidebar está expandido
+            return isCollapsed ? null : (
+              <div key={item.name} className="sidebar-group-label">
+                {item.name}
+              </div>
+            );
+          }
 
-        {/* Multi-level link example */}
-        <div
-          className="sidebar-link relative"
-          onClick={() => !isCollapsed && toggleSubMenu("menu1")}
-        >
-          <CogIcon className="h-5 w-5" />
-          <span className="flex-1 whitespace-nowrap">Multi level 1</span>
-          {!isCollapsed && (
-            <ChevronDownIcon
-              className={`h-5 w-5 absolute right-0 transform transition-transform ${
-                subMenusOpen["menu1"] ? "rotate-180" : ""
-              }`}
-            />
-          )}
-        </div>
-        {subMenusOpen["menu1"] && (
-          <Link
-            to="/page3"
-            className="flex items-center space-x-2 sidebar-link sidebar-link-child"
-          >
-            <span>Page 3</span>
-          </Link>
-        )}
+          const Icon = item.icon; // Icono dinámico basado en el mapa del sitio
 
-        {/* Another multi-level link example */}
-        <div
-          className="sidebar-link relative"
-          onClick={() => !isCollapsed && toggleSubMenu("menu2")}
-        >
-          <ShoppingBagIcon className="h-5 w-5" />
-          <span className="flex-1 whitespace-nowrap">Multi level 2</span>
-          {!isCollapsed && (
-            <ChevronDownIcon
-              className={`h-5 w-5 absolute right-0 transform transition-transform ${
-                subMenusOpen["menu2"] ? "rotate-180" : ""
-              }`}
-            />
-          )}
-        </div>
-        {subMenusOpen["menu2"] && (
-          <Link
-            to="/page3"
-            className="flex items-center space-x-2 sidebar-link sidebar-link-child"
-          >
-            <span>Page 3</span>
-          </Link>
-        )}
-
-        {/* More main links... */}
-        <Link to="/page3" className="flex items-center space-x-2 sidebar-link">
-          <CogIcon className="h-5 w-5" />
-          <span>Page 3</span>
-        </Link>
+          return (
+            <React.Fragment key={item.name}>
+              {item.childrens ? (
+                <div
+                  className={`sidebar-link relative group`}
+                  onClick={() => item.childrens && toggleSubMenu(item.name)}
+                >
+                  {Icon && <Icon className="h-5 w-5" />}
+                  <span className="flex-1 whitespace-nowrap">{item.name}</span>
+                  <ChevronDownIcon
+                    className={`h-5 w-5 absolute right-0 transform transition-transform ${
+                      subMenusOpen[item.name] ? "rotate-180" : ""
+                    } ${isCollapsed ? "invisible" : "visible"}`}
+                  />
+                </div>
+              ) : (
+                <Link
+                  to={item.path}
+                  className="flex items-center space-x-2 sidebar-link"
+                >
+                  {Icon && <Icon className="h-5 w-5" />}
+                  <span>{item.name}</span>
+                </Link>
+              )}
+              {item.childrens &&
+                subMenusOpen[item.name] &&
+                renderSubMenu(item.childrens)}
+            </React.Fragment>
+          );
+        })}
       </nav>
     </div>
   );
