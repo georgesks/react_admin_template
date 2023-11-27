@@ -1,0 +1,45 @@
+/* Estilos para el menú desplegable del usuario */
+.user-dropdown-menu {
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    /* inicialmente oculto */
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 0.875rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.user-dropdown-menu.show {
+    display: block;
+    /* muestra el menú cuando está activo */
+}
+
+.user-dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+}
+
+.user-dropdown-menu a:hover,
+.user-dropdown-menu a:focus {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
